@@ -1,6 +1,8 @@
+local player = game.Players.LocalPlayer -- Отримуємо локального гравця
+
 -- Створюємо ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.Parent = player:WaitForChild("PlayerGui") -- Додаємо до PlayerGui
 
 -- Створюємо Frame
 local frame = Instance.new("Frame")
@@ -11,3 +13,37 @@ frame.AnchorPoint = Vector2.new(0.5, 0.5) -- Центруємо фрейм
 frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Чорний фон
 frame.BorderSizePixel = 2 -- Товщина бордера
 frame.BorderColor3 = Color3.fromRGB(128, 128, 128) -- Сірий бордер
+
+-- Скрипт для перетягування
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+-- Подія при натисканні
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+    end
+end)
+
+-- Подія при відпусканні кнопки
+frame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- Подія при русі миші
+frame.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        frame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
