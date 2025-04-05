@@ -19,6 +19,7 @@ return function(isEnabled)
         -- UI – crosshair circle
         local ScreenGui = Instance.new("ScreenGui")
         ScreenGui.Parent = PlayerGui
+        ScreenGui.Name = "UserInput"
 
         local CircleFrame = Instance.new("Frame")
         CircleFrame.Size = UDim2.new(0, 100, 0, 100)
@@ -103,5 +104,9 @@ return function(isEnabled)
                 end
             end
         end)
+    else
+        if ExistingUI then
+            ExistingUI:Destroy()
+        end
     end
 end
