@@ -82,7 +82,7 @@ return function(isEnabled)
         UserInputService.InputBegan:Connect(function(input, gameProcessed)
             if input.UserInputType == Enum.UserInputType.MouseButton3 and not gameProcessed then
                 if isEnabled then
-                    if isAimbotActive then
+                    if not isAimbotActive then
                         target = nil
                     else
                         print("Aimbot: Active")
