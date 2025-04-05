@@ -3,6 +3,12 @@ return function(debugEnabled)
 	local LocalPlayer = Players.LocalPlayer
 	local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
+	local DebugUI = LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("DebugUI")
+	
+	if DebugUI then
+		DebugUI:Destroy()
+	end
+	
 	local Gui = Instance.new("ScreenGui")
 	Gui.Name = "DebugUI"
 	Gui.ResetOnSpawn = false
