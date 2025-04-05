@@ -1,5 +1,7 @@
+local isAimbotActive = false  -- Змінна для перевірки, чи активований аімбот
+
 return function(isEnabled)
-    -- //Added Existing UI
+    -- // Friend Ignore added
 
     local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
@@ -14,7 +16,9 @@ return function(isEnabled)
         ExistingUI:Destroy()
     end
 
-    if isEnabled == true then
+    if isEnabled == true and not isAimbotActive then
+        -- Якщо аімбот не активний, активуємо його
+        isAimbotActive = true
 
         -- UI – crosshair circle
         local ScreenGui = Instance.new("ScreenGui")
@@ -37,6 +41,7 @@ return function(isEnabled)
         UIStroke.Parent = CircleFrame
 
         local target = nil
+        local aimEnabled = true
 
         -- Find valid target (not a friend)
         local function findTarget()
@@ -74,19 +79,21 @@ return function(isEnabled)
         -- Toggle aim with middle mouse button
         UserInputService.InputBegan:Connect(function(input, gameProcessed)
             if input.UserInputType == Enum.UserInputType.MouseButton3 and not gameProcessed then
-                aimEnabled = not aimEnabled
-                if aimEnabled then
-                    print("✅ Auto-aim enabled")
-                else
-                    print("❌ Auto-aim disabled")
-                    target = nil
+                if isEnabled then
+                    aimEnabled = not aimEnabled
+                    if aimEnabled then
+                        print("✅ Auto-aim enabled")
+                    else
+                        print("❌ Auto-aim disabled")
+                        target = nil
+                    end
                 end
             end
         end)
 
         -- Auto-aim loop
         RunService.RenderStepped:Connect(function()
-            if isEnabled == false then return end
+            if not aimEnabled or not isEnabled then return end
 
             if target then
                 if target.Humanoid and target.Humanoid.Health > 10 then
@@ -107,5 +114,8 @@ return function(isEnabled)
         if ExistingUI then
             ExistingUI:Destroy()
         end
+
+        -- Якщо aimbot вимкнений, змінюємо стан на "не активний"
+        isAimbotActive = false
     end
 end
