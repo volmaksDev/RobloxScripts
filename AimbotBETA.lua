@@ -74,10 +74,8 @@ return function(isEnabled)
 
         -- Toggle aim with middle mouse button
         UserInputService.InputBegan:Connect(function(input, gameProcessed)
-            if input.UserInputType == Enum.UserInputType.MouseButton3 and not gameProcessed then
-                if not ExistingUI then
-                    target = nil
-                end
+            if input.KeyCode == Enum.KeyCode.KeypadOne then
+                target = nil
             end
         end)
 
