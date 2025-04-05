@@ -14,6 +14,7 @@ return function(isEnabled)
         ExistingUI:Destroy()
     end
 
+    -- Якщо isEnabled == false, то аімбот не працює
     if isEnabled == true then
 
         -- UI – crosshair circle
@@ -75,19 +76,23 @@ return function(isEnabled)
         -- Toggle aim with middle mouse button
         UserInputService.InputBegan:Connect(function(input, gameProcessed)
             if input.UserInputType == Enum.UserInputType.MouseButton3 and not gameProcessed then
-                aimEnabled = not aimEnabled
-                if aimEnabled then
-                    print("✅ Auto-aim enabled")
-                else
-                    print("❌ Auto-aim disabled")
-                    target = nil
+                -- Якщо isEnabled == false, то не активуємо aimEnabled
+                if isEnabled == true then
+                    aimEnabled = not aimEnabled
+                    if aimEnabled then
+                        print("✅ Auto-aim enabled")
+                    else
+                        print("❌ Auto-aim disabled")
+                        target = nil
+                    end
                 end
             end
         end)
 
         -- Auto-aim loop
         RunService.RenderStepped:Connect(function()
-            if not aimEnabled then return end
+            -- Якщо аімбот вимкнений або isEnabled == false, то не працюємо
+            if not aimEnabled or isEnabled == false then return end
 
             if target then
                 if target.Humanoid and target.Humanoid.Health > 10 then
