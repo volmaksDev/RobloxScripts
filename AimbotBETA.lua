@@ -75,11 +75,7 @@ return function(isEnabled)
         -- Toggle aim with middle mouse button
         UserInputService.InputBegan:Connect(function(input, gameProcessed)
             if input.UserInputType == Enum.UserInputType.MouseButton3 and not gameProcessed then
-                aimEnabled = not aimEnabled
-                if aimEnabled then
-                    print("✅ Auto-aim enabled")
-                else
-                    print("❌ Auto-aim disabled")
+                if not ExistingUI then
                     target = nil
                 end
             end
