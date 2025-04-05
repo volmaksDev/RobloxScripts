@@ -74,6 +74,8 @@ return function(isEnabled)
             end
 
             return nil
+        else
+            isAimbotActive = false
         end
 
         -- Toggle aim with middle mouse button
