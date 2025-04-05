@@ -9,7 +9,6 @@ return function(isEnabled)
     local UserInputService = game:GetService("UserInputService")
 
     local ExistingUI = LocalPlayer.PlayerGui:FindFirstChild("UserInput")
-    local DebugUI = LocalPlayer.PlayerGui:FindFirstChild("DebugUI")
 
     if ExistingUI then
         ExistingUI:Destroy()
@@ -38,11 +37,6 @@ return function(isEnabled)
 
         local target = nil
         local aimEnabled = true
-
-        if DebugUI then
-            local DebugLabel = DebugUI:FindFirstChild("DebugLabel")
-            DebugLabel.Text = "Aimbot✅"
-        end
 
         -- Find valid target (not a friend)
         local function findTarget()
@@ -109,10 +103,5 @@ return function(isEnabled)
                 end
             end
         end)
-    else
-        if DebugUI then
-            local DebugLabel = DebugUI:FindFirstChild("DebugLabel")
-            DebugLabel.Text = "Aimbot❌"
-        end
     end
 end
