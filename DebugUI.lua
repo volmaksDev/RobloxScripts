@@ -1,16 +1,13 @@
-function Init(Value)
-	local isEnabled = Value
-	
+return function(debugEnabled)
 	local Players = game:GetService("Players")
 	local LocalPlayer = Players.LocalPlayer
 	local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-	
+
 	local Gui = Instance.new("ScreenGui")
 	Gui.Name = "DebugUI"
 	Gui.ResetOnSpawn = false
 	Gui.Parent = PlayerGui
-	Gui.Enabled = isEnabled
-	
+
 	local Frame = Instance.new("Frame")
 	Frame.Name = "DebugFrame"
 	Frame.Size = UDim2.new(0, 350, 0, 200)
@@ -18,14 +15,14 @@ function Init(Value)
 	Frame.BackgroundColor3 = Color3.fromRGB(94,94,94)
 	Frame.BackgroundTransparency = 0.6
 	Frame.Parent = Gui
-	
+
 	local UIListLayout = Instance.new("UIListLayout", Frame)
 	UIListLayout.Padding = UDim.new(0,20)
 	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	
+
 	local UIPadding = Instance.new("UIPadding", Frame)
 	UIPadding.PaddingTop = UDim.new(0,5)
-	
+
 	local UiCorner = Instance.new("UICorner")
 	UiCorner.CornerRadius = UDim.new(0,8)
 	UiCorner.Parent = Frame
@@ -48,7 +45,7 @@ function Init(Value)
 	DebugLabel.Position = UDim2.new(0, 0, 0.3, 0)
 	DebugLabel.BackgroundColor3 = Color3.fromRGB(90,90,90)
 	DebugLabel.BackgroundTransparency = 0.5
-	DebugLabel.Text = ""
+	DebugLabel.Text = debugEnabled and "Debug Mode: ON" or "Debug Mode: OFF"
 	DebugLabel.TextScaled = true
 	DebugLabel.TextColor3 = Color3.fromRGB(255,255,255)
 	DebugLabel.Parent = Frame
@@ -56,5 +53,3 @@ function Init(Value)
 	local UIDragDetector = Instance.new("UIDragDetector")
 	UIDragDetector.Parent = Frame
 end
-
-Init(Value)
