@@ -7,6 +7,7 @@ return function(debugEnabled)
 	Gui.Name = "DebugUI"
 	Gui.ResetOnSpawn = false
 	Gui.Parent = PlayerGui
+	Gui.Enabled = debugEnabled
 
 	local Frame = Instance.new("Frame")
 	Frame.Name = "DebugFrame"
