@@ -41,7 +41,7 @@ return function(isEnabled)
         UIStroke.Parent = CircleFrame
 
         local target = nil
-        local aimEnabled = true
+        local isAimbotActive = true
 
         -- Find valid target (not a friend)
         local function findTarget()
@@ -80,12 +80,10 @@ return function(isEnabled)
         UserInputService.InputBegan:Connect(function(input, gameProcessed)
             if input.UserInputType == Enum.UserInputType.MouseButton3 and not gameProcessed then
                 if isEnabled then
-                    aimEnabled = not aimEnabled
-                    if aimEnabled then
-                        print("✅ Auto-aim enabled")
-                    else
-                        print("❌ Auto-aim disabled")
+                    if isAimbotActive then
                         target = nil
+                    else
+                        print("Aimbot: Active")
                     end
                 end
             end
