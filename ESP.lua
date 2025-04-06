@@ -8,13 +8,41 @@ local espEnabled = false
 
 return function(isEnabled)
     -- Якщо скрипт вже був активним — відключаємо його
-    if espConnection then
-        espConnection:Disconnect()
-        espConnection = nil
+    if espEnabled then
+        espEnabled = false
+
+        -- Відключаємо підписку на RenderStepped, якщо вона була активна
+        if espConnection then
+            espConnection:Disconnect()
+            espConnection = nil
+        end
+
+        -- Видаляємо всі підсвічування та ніки
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer then
+                local character = player.Character
+                if character then
+                    -- Видаляємо Highlight
+                    local highlight = character:FindFirstChild("Highlight")
+                    if highlight then
+                        highlight:Destroy()
+                    end
+
+                    -- Видаляємо BillboardGui
+                    local head = character:FindFirstChild("Head")
+                    if head then
+                        local nameTag = head:FindFirstChild("NameTag")
+                        if nameTag then
+                            nameTag:Destroy()
+                        end
+                    end
+                end
+            end
+        end
     end
 
     if isEnabled then
-        -- Активуємо прицілювання
+        -- Активуємо підсвічування
         espEnabled = true
 
         -- Цикл, який обробляє гравців, додаючи підсвічування та ніки
@@ -63,37 +91,5 @@ return function(isEnabled)
                 end
             end
         end)
-    else
-        -- Вимикаємо підсвічування та ніки, коли isEnabled == false
-        espEnabled = false
-
-        -- Відключаємо підписку на RenderStepped
-        if espConnection then
-            espConnection:Disconnect()
-            espConnection = nil
-        end
-
-        -- Видаляємо всі підсвічування та ніки
-        for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= LocalPlayer then
-                local character = player.Character
-                if character then
-                    -- Видаляємо Highlight
-                    local highlight = character:FindFirstChild("Highlight")
-                    if highlight then
-                        highlight:Destroy()
-                    end
-
-                    -- Видаляємо BillboardGui
-                    local head = character:FindFirstChild("Head")
-                    if head then
-                        local nameTag = head:FindFirstChild("NameTag")
-                        if nameTag then
-                            nameTag:Destroy()
-                        end
-                    end
-                end
-            end
-        end
     end
 end
