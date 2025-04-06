@@ -9,7 +9,7 @@ local espEnabled = false
 return function(isEnabled)
     -- Якщо скрипт вже був активним — відключаємо його
     if espConnection then
-        aimConnection:Disconnect()
+        espConnection:Disconnect()
         espConnection = nil
     end
 
