@@ -1005,11 +1005,11 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 
 		-- Set initial transparency values
 
-		newNotification.Title.TextColor3 = SelectedTheme.TextColor3
-		newNotification.Description.TextColor3 = SelectedTheme.TextColor3
-		newNotification.BackgroundColor3 = SelectedTheme.BackgroundColor3
-		newNotification.UIStroke.Color = SelectedTheme.TextColor3
-		newNotification.Icon.ImageColor3 = SelectedTheme.TextColor3
+		newNotification.Title.TextColor3 = SelectedTheme.Color3
+		newNotification.Description.TextColor3 = SelectedTheme.Color3
+		newNotification.BackgroundColor3 = SelectedTheme.Color3
+		newNotification.UIStroke.Color = SelectedTheme.Color3
+		newNotification.Icon.ImageColor3 = SelectedTheme.Color3
 
 		newNotification.BackgroundTransparency = 1
 		newNotification.Title.TextTransparency = 1
