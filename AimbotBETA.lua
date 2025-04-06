@@ -82,19 +82,22 @@ return function(isEnabled)
         -- Auto-aim loop
         RunService.RenderStepped:Connect(function()
             if not aimEnabled then return end
-
-            if target then
-                if target.Humanoid and target.Humanoid.Health > 10 then
-                    Camera.CFrame = CFrame.new(Camera.CFrame.Position, target.Head.Position)
+            if isEnabled == true then
+                if target then
+                    if target.Humanoid and target.Humanoid.Health > 10 then
+                        Camera.CFrame = CFrame.new(Camera.CFrame.Position, target.Head.Position)
+                    else
+                        print("⚠️ Target lost: " .. target.Name)
+                        target = nil
+                    end
                 else
-                    print("⚠️ Target lost: " .. target.Name)
-                    target = nil
-                end
-            else
-                local newTarget = findTarget()
-                if newTarget then
-                    target = newTarget
-                    print("🎯 New target acquired: " .. target.Name)
+                    local newTarget = findTarget()
+                    if newTarget then
+                        target = newTarget
+                        print("🎯 New target acquired: " .. target.Name)
+                    end
+                else
+                    return
                 end
             end
         end)
