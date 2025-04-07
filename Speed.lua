@@ -1,5 +1,5 @@
 local player = game.Players.LocalPlayer
-local speed = 125 
+local speed = 100
 local RunService = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
 
