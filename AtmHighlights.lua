@@ -10,8 +10,8 @@ return function(isEnabled)
 
 	if isEnabled == true then
 		HighlightEnabled = true
-		local function GetATMs()
 
+		local function GetATMs()
 			if not HighlightEnabled then return end
 
 			local ATMFolder = workspace.Map.Props:GetChildren()
@@ -44,7 +44,20 @@ return function(isEnabled)
 		end
 
 		Connection = RunService.Heartbeat:Connect(GetATMs)
+
 	else
 		HighlightEnabled = false
+
+		-- 🧹 Видаляємо всі Highlight-и з ATM
+		local ATMFolder = workspace.Map.Props:GetChildren()
+
+		for _, ATM in ipairs(ATMFolder) do
+			if ATM.Name == "ATM" then
+				local Highlight = ATM:FindFirstChild("ATMHighlight")
+				if Highlight then
+					Highlight:Destroy()
+				end
+			end
+		end
 	end
 end
