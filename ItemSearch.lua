@@ -31,10 +31,10 @@ return function(itemNameToFind)
 
     available_hand_slots = max_hand_slots - total_hand_slots_used
 
-    print("🔎 Предмет:", itemForLook)
-    print("📦 У руках:", found_count)
-    print("💼 Використано слотів:", total_hand_slots_used)
-    print("🟢 Вільно слотів:", available_hand_slots)
+    --print("🔎 Предмет:", itemForLook)
+    --print("📦 У руках:", found_count)
+    --print("💼 Використано слотів:", total_hand_slots_used)
+    --print("🟢 Вільно слотів:", available_hand_slots)
 
     return {
         item = itemForLook,
