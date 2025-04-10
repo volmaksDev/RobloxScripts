@@ -27,6 +27,8 @@ return function(item)
         end
     end
 
+    available_hand_slots = max_hand_slots - total_hand_items
+
     print("Предмет:", itemForLook)
     print("Кількість в руках:", found_count)
     print("Всього предметів в руках:", total_hand_items)
